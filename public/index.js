@@ -30,7 +30,7 @@ function initBotConversation() {
         botAvatarImage: 'https://docs.microsoft.com/en-us/azure/bot-service/v4sdk/media/logo_bot.svg?view=azure-bot-service-4.0',
         // botAvatarInitials: '',
         // userAvatarImage: '',
-        hideSendBox: false, /* set to true to hide the send box from the view */
+        hideSendBox: true, /* set to true to hide the send box from the view */
         botAvatarInitials: 'Bot',
         userAvatarInitials: 'You',
         backgroundColor: '#F8F8F8'
@@ -55,7 +55,7 @@ function initBotConversation() {
                         */
 
                         // Use the following activity to proactively invoke a bot scenario
-                        /*
+                        
                         store.dispatch({
                             type: 'DIRECT_LINE/POST_ACTIVITY',
                             meta: {method: 'keyboard'},
@@ -64,16 +64,13 @@ function initBotConversation() {
                                     type: "invoke",
                                     name: "TriggerScenario",
                                     value: {
-                                        trigger: "{scenario_id}",
-                                        args: {
-                                            myVar1: "{custom_arg_1}",
-                                            myVar2: "{custom_arg_2}"
-                                        }
+                                        trigger: "covid19_assessment",
+                                        args: {}
                                     }
                                 }
                             }
                         });
-                        */
+                        
                     }
                     return next(action);
                 }
