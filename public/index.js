@@ -1,11 +1,44 @@
 function requestChatBot() {
+    const params = new URLSearchParams(location.search);
     const oReq = new XMLHttpRequest();
     oReq.addEventListener("load", initBotConversation);
     var path = "/chatBot";
+    if (params.has('userId')) {
+        path += "&userId=" + params.get('userId');
+    }
+    if (loc) {
+        path += "&lat=" + loc.lat + "&long=" + loc.long;
+    }
+
     oReq.open("POST", path);
     oReq.send();
 }
-
+function chatRequested() {
+    const params = new URLSearchParams(location.search);
+    if (params.has('shareLocation')) {
+        getUserLocation(requestChatBot);
+    }
+    else {
+        requestChatBot();
+    }
+}
+function getUserLocation(callback) {
+    navigator.geolocation.getCurrentPosition(
+        function(position) {
+            var latitude  = position.coords.latitude;
+            var longitude = position.coords.longitude;
+            var location = {
+                lat: latitude,
+                long: longitude
+            }
+            callback(location);
+        },
+        function(error) {
+            // user declined to share location
+            console.log("location error:" + error.message);
+            callback();
+        });
+}
 function initBotConversation() {
     if (this.status >= 400) {
         alert(this.statusText);
@@ -27,12 +60,12 @@ function initBotConversation() {
         domain: domain
     });
     const styleOptions = {
-        botAvatarImage: 'https://media-exp1.licdn.com/dms/image/C4E0BAQEclA3Vh3sTNw/company-logo_200_200/0?e=2159024400&v=beta&t=KD7qFl36K5BdZmGGqu1k8uZD-wYIn47CW_nR5f0l1z4',
+       // botAvatarImage: 'https://media-exp1.licdn.com/dms/image/C4E0BAQEclA3Vh3sTNw/company-logo_200_200/0?e=2159024400&v=beta&t=KD7qFl36K5BdZmGGqu1k8uZD-wYIn47CW_nR5f0l1z4',
         // botAvatarInitials: '',
         // userAvatarImage: '',
         hideSendBox: true, /* set to true to hide the send box from the view */
-        botAvatarInitials: 'Bot',
-        userAvatarInitials: 'You',
+     //   botAvatarInitials: 'C',
+     //   userAvatarInitials: 'You',
         backgroundColor: '#F8F8F8'
     };
 
@@ -93,3 +126,4 @@ function startChat(user, webchatOptions) {
     const botContainer = document.getElementById('webchat');
     window.WebChat.renderWebChat(webchatOptions, botContainer);
 }
+
