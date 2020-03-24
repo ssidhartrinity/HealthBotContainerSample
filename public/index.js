@@ -39,6 +39,16 @@ function getUserLocation(callback) {
             callback();
         });
 }
+function getParentUrl() {
+    var isInIframe = (parent !== window),
+        parentUrl = null;
+
+    if (isInIframe) {
+        parentUrl = document.referrer;
+    }
+
+    return parentUrl;
+}
 function initBotConversation() {
     if (this.status >= 400) {
         alert(this.statusText);
