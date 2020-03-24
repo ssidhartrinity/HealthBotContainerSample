@@ -2,7 +2,7 @@ function requestChatBot(loc) {
     const params = new URLSearchParams(location.search);
     const oReq = new XMLHttpRequest();
     oReq.addEventListener("load", initBotConversation);
-    var path = "/chatBot";
+    var path = "/chatBot?";
     if (params.has('userId')) {
         path += "&userId=" + params.get('userId');
     }
