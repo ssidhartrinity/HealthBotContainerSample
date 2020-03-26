@@ -66,12 +66,12 @@ function initBotConversation() {
         name: tokenPayload.userName
     };
     let domain = undefined;
-    if (tokenPayload.region) {
-        region = tokenPayload.region;
-    }
-    let region = undefined;
     if (tokenPayload.directLineURI) {
         domain =  "https://" +  tokenPayload.directLineURI + "/v3/directline";
+    }
+    let region = undefined;
+    if (tokenPayload.region) {
+        region = tokenPayload.region;
     }
     var botConnection = window.WebChat.createDirectLine({
         token: tokenPayload.connectorToken,
