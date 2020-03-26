@@ -51,8 +51,8 @@ app.post('/chatBot',  function(req, res) {
             response['userName'] = req.query.userName;
             response['connectorToken'] = parsedBody.token;
             response['optionalAttributes'] = {age: 33};
-            if (req.query.lat && req.query.long)  {
-                response['location'] = {lat: req.query.lat, long: req.query.long};
+            if (req.query.region)  {
+                response['region'] = req.query.region;
             }
             response['directLineURI'] = DIRECTLINE_ENDPOINT_URI;
             const jwtToken = jwt.sign(response, APP_SECRET);

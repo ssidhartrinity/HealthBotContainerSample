@@ -1,4 +1,4 @@
-function requestChatBot(loc) {
+function requestChatBot() {
     const params = new URLSearchParams(location.search);
     const oReq = new XMLHttpRequest();
     oReq.addEventListener("load", initBotConversation);
@@ -6,39 +6,42 @@ function requestChatBot(loc) {
     if (params.has('userId')) {
         path += "&userId=" + params.get('userId');
     }
-    if (loc) {
-        path += "&lat=" + loc.lat + "&long=" + loc.long;
+    if (params.has('region')) {
+        path += "&region=" + params.get('region');
     }
+    //if (loc) {
+   //     path += "&lat=" + loc.lat + "&long=" + loc.long;
+  //  }
 
     oReq.open("POST", path);
     oReq.send();
 }
-function chatRequested() {
-    const params = new URLSearchParams(location.search);
-    if (params.has('shareLocation')) {
-        getUserLocation(requestChatBot);
-    }
-    else {
-        requestChatBot();
-    }
-}
-function getUserLocation(callback) {
-    navigator.geolocation.getCurrentPosition(
-        function(position) {
-            var latitude  = position.coords.latitude;
-            var longitude = position.coords.longitude;
-            var location = {
-                lat: latitude,
-                long: longitude
-            }
-            callback(location);
-        },
-        function(error) {
+//function chatRequested() {
+  //  const params = new URLSearchParams(location.search);
+    //if (params.has('shareLocation')) {
+      //  getUserLocation(requestChatBot);
+    //}
+    //else {
+      //  requestChatBot();
+    //}
+//}
+//function getUserLocation(callback) {
+  //  navigator.geolocation.getCurrentPosition(
+    //    function(position) {
+      //      var latitude  = position.coords.latitude;
+        //    var longitude = position.coords.longitude;
+          //  var location = {
+            //    lat: latitude,
+              //  long: longitude
+          //  }
+            //callback(location);
+        //},
+      //  function(error) {
             // user declined to share location
-            console.log("location error:" + error.message);
-            callback();
-        });
-}
+          //  console.log("location error:" + error.message);
+         //   callback();
+       // });
+//}
 //Suggestion for document referrer location
 //function getParentUrl() {
   //  var isInIframe = (parent !== window),
@@ -63,6 +66,10 @@ function initBotConversation() {
         name: tokenPayload.userName
     };
     let domain = undefined;
+    if (tokenPayload.region) {
+        region = tokenPayload.region;
+    }
+    let region = undefined;
     if (tokenPayload.directLineURI) {
         domain =  "https://" +  tokenPayload.directLineURI + "/v3/directline";
     }
@@ -72,11 +79,11 @@ function initBotConversation() {
     });
     const styleOptions = {
        // botAvatarImage: 'https://media-exp1.licdn.com/dms/image/C4E0BAQEclA3Vh3sTNw/company-logo_200_200/0?e=2159024400&v=beta&t=KD7qFl36K5BdZmGGqu1k8uZD-wYIn47CW_nR5f0l1z4',
-        // botAvatarInitials: '',
+         botAvatarInitials: 'C',
         // userAvatarImage: '',
         hideSendBox: true, /* set to true to hide the send box from the view */
-     //   botAvatarInitials: 'C',
-       // userAvatarInitials: 'You',
+        //botAvatarInitials: 'C',
+        userAvatarInitials: 'You',
         backgroundColor: '#F8F8F8'
     };
 
@@ -109,7 +116,7 @@ function initBotConversation() {
                                     name: "TriggerScenario",
                                     value: {
                                         trigger: "covid19_assessment",
-                                        args: {}
+                                        args: {region: region}
                                     }
                                 }
                             }
