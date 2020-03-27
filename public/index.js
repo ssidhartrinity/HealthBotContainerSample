@@ -84,14 +84,8 @@ function initBotConversation() {
         hideSendBox: true, /* set to true to hide the send box from the view */
         //botAvatarInitials: 'C',
         userAvatarInitials: 'You',
-        botAvatarBackgroundColor: '#555659'
+        botAvatarBackgroundColor: '#555659',
         backgroundColor: '#F8F8F8',
-get backgroundColor() {
-            return this.backgroundColor;
-        },
-set backgroundColor(value) {
-            this.backgroundColor = value;
-        },
 }
 
     const store = window.WebChat.createStore(
