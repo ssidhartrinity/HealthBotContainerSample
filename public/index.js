@@ -85,7 +85,13 @@ function initBotConversation() {
         //botAvatarInitials: 'C',
         userAvatarInitials: 'You',
         botAvatarBackgroundColor: '#555659'
-        backgroundColor: '#F8F8F8'
+        _backgroundColor: '#F8F8F8',
+        get backgroundColor() {
+            return this._backgroundColor;
+        },
+        set backgroundColor(value) {
+            this._backgroundColor = value;
+        },
     };
 
     const store = window.WebChat.createStore(
