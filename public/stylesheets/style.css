@@ -11,7 +11,7 @@ body {
 }
 
 #webchat[powered-by-microsoft-azure] [role="complementary"] ul[role="list"]::after {
-  content: 'Powered by Microsoft Azure';
+  content: '';
   background: linear-gradient(rgba(248, 248, 248, 0), rgba(248, 248, 248, .63), #F8F8F8 40%);
   bottom: 0;
   right: 0;
