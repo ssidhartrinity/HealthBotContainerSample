@@ -91,7 +91,6 @@ function initBotConversation() {
         hideSendBox: true, /* set to true to hide the send box from the view */
         //botAvatarInitials: 'C',
         userAvatarInitials: 'You',
-        
         backgroundColor: '#F8F8F8',
 }
 
