@@ -82,7 +82,7 @@ function initBotConversation() {
     const styleOptions = {
        // avatarBorderRadius: '50%',
        // avatarSize: 40,
-        botAvatarBackgroundColor: '#555659',
+       // botAvatarBackgroundColor: '#555659',
        // botAvatarImage: 'https://media-exp1.licdn.com/dms/image/C4E0BAQEclA3Vh3sTNw/company-logo_200_200/0?e=2159024400&v=beta&t=KD7qFl36K5BdZmGGqu1k8uZD-wYIn47CW_nR5f0l1z4',
         // userAvatarImage: '',
         hideSendBox: True, /* set to true to hide the send box from the view */
